@@ -2,7 +2,7 @@ package tech.mhuang.ext.interchan.wechat.wechat.common.pool;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Component;
+import tech.mhuang.core.pool.BaseExecutor;
 import tech.mhuang.core.reflect.DefaultReflectInvoke;
 import tech.mhuang.ext.interchan.wechat.wechat.common.pool.service.ExecuteService;
 import tech.mhuang.ext.interchan.wechat.wechat.common.pool.thread.ShareThread;
@@ -11,7 +11,6 @@ import tech.mhuang.ext.interchan.wechat.wechat.common.pool.thread.TextThread;
 import tech.mhuang.ext.spring.reflect.SpringReflectInvoke;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.concurrent.ExecutorService;
 
 /**
  * 微信执行事件
@@ -19,12 +18,11 @@ import java.util.concurrent.ExecutorService;
  * @author mhuang
  * @since 1.0.0
  */
-@Component
 public class ExecutorEventWechat {
 
     @Setter
     @Getter
-    private ExecutorService eService;
+    private BaseExecutor eService;
 
     public void subscribe(String openId, String status, ExecuteService weChatService) {
         eService.execute(new SubscribeThread(openId, status, weChatService));

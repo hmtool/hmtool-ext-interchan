@@ -39,7 +39,8 @@ public class AlipayServer {
     private final static String APP_MODE = "app";
 
     public static AlipayTradeAppPayResponse payment(AliPayDTO dto) throws Exception {
-        AlipayClient client = getClient(dto.getMchId(), dto.getRsaPrivateKey(), dto.getRsaPublicKey());
+        AlipayClient client = getClient(dto.getMchId(), dto.getRsaPrivateKey(), dto.getRsaPublicKey(),
+                dto.getProxyIp(),dto.getProxyPort());
         if (APP_MODE.equals(dto.getMode())) {
             return createAppPay(client,
                     dto.getBody(),
@@ -58,7 +59,8 @@ public class AlipayServer {
      */
     public static AlipayTradeRefundResponse refundOrder(AliRefundDTO dto) throws Exception {
         try {
-            AlipayClient alipayClient = getClient(dto.getMchId(), dto.getRsaPrivateKey(), dto.getRsaPublicKey());
+            AlipayClient alipayClient = getClient(dto.getMchId(), dto.getRsaPrivateKey(), dto.getRsaPublicKey(),
+                    dto.getProxyIp(),dto.getProxyPort());
             AlipayTradeRefundModel model = new AlipayTradeRefundModel();
             model.setOutTradeNo(dto.getTradeNo()); //与预授权转支付商户订单号相同，代表对该笔交易退款
             model.setRefundAmount(dto.getAmount());
@@ -74,7 +76,8 @@ public class AlipayServer {
 
     public static AlipayFundTransToaccountTransferResponse fundTrans(AliTransDTO dto) throws Exception {
 
-        AlipayClient alipayClient = getClient(dto.getMchId(), dto.getRsaPrivateKey(), dto.getRsaPublicKey());
+        AlipayClient alipayClient = getClient(dto.getMchId(), dto.getRsaPrivateKey(), dto.getRsaPublicKey(),
+                dto.getProxyIp(),dto.getProxyPort());
         AlipayFundTransToaccountTransferRequest request = new AlipayFundTransToaccountTransferRequest();
         Map<String, String> contentMap = new HashMap<>();
         contentMap.put("out_biz_no", dto.getTradeNo());
@@ -117,11 +120,12 @@ public class AlipayServer {
         //就是orderString 可以直接给客户端请求，无需再做处理。
     }
 
-    public static AlipayClient getClient(String appId, String rsaPrivateKey, String rsaPublicKey) {
-        return getClient(GATEWAY, appId, rsaPrivateKey, FORMAT, CHARSET, rsaPublicKey, SIGN_TYPE);
+    public static AlipayClient getClient(String appId, String rsaPrivateKey, String rsaPublicKey,String proxyIp,int proxyPort) {
+        return getClient(GATEWAY, appId, rsaPrivateKey, FORMAT, CHARSET, rsaPublicKey, SIGN_TYPE,proxyIp,proxyPort);
     }
 
-    public static AlipayClient getClient(String gateway, String appId, String rsaPrivateKey, String format, String charset, String rsaPublicKey, String signType) {
-        return new DefaultAlipayClient(gateway, appId, rsaPrivateKey, format, charset, rsaPublicKey, signType);
+    public static AlipayClient getClient(String gateway, String appId, String rsaPrivateKey, String format, String charset, String rsaPublicKey, String signType,String proxyIp,int proxyPort){
+        return new DefaultAlipayClient(gateway, appId, rsaPrivateKey, format, charset,
+                rsaPublicKey, signType,proxyIp,proxyPort);
     }
 }

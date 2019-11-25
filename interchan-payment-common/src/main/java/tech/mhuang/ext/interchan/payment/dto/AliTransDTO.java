@@ -59,4 +59,7 @@ public class AliTransDTO {
      */
     private String remark;
 
+    private String proxyIp;
+
+    private int proxyPort;
 }

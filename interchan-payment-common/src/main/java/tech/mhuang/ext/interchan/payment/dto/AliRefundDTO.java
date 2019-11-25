@@ -35,4 +35,7 @@ public class AliRefundDTO {
     private String outRequestNo;
     //标识一次退款请求，同一笔交易多次退款需要保证唯一，如部分退款则此参数必传
 
+    private String proxyIp;
+
+    private int proxyPort;
 }

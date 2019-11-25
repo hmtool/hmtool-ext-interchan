@@ -6,7 +6,7 @@
     <parent>
         <groupId>tech.mhuang</groupId>
         <artifactId>hmtool-ext-interchan</artifactId>
-        <version>1.3.0</version>
+        <version>1.4.0</version>
     </parent>
     <artifactId>interchan-redis-kafka-middle-common</artifactId>
     <name>interchan-redis-kafka-middle-common</name>

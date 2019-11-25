@@ -4,11 +4,11 @@ import tech.mhuang.core.util.StringUtil;
 import tech.mhuang.ext.interchan.payment.dto.WechatPayDTO;
 import tech.mhuang.ext.interchan.payment.dto.WechatRefundDTO;
 import tech.mhuang.ext.interchan.payment.exception.InterchanPayException;
-import tech.mhuang.ext.interchan.payment.wechat.utils.CommonUtil;
-import tech.mhuang.ext.interchan.payment.wechat.utils.HttpUtil;
-import tech.mhuang.ext.interchan.payment.wechat.utils.PayCommonUtil;
-import tech.mhuang.ext.interchan.payment.wechat.utils.WechatConfigUtil;
-import tech.mhuang.ext.interchan.payment.wechat.utils.XMLUtil;
+import tech.mhuang.ext.interchan.payment.wechat.util.CommonUtil;
+import tech.mhuang.ext.interchan.payment.wechat.util.HttpUtil;
+import tech.mhuang.ext.interchan.payment.wechat.util.PayCommonUtil;
+import tech.mhuang.ext.interchan.payment.wechat.util.WechatConfigUtil;
+import tech.mhuang.ext.interchan.payment.wechat.util.XMLUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -47,22 +47,31 @@ public class WechatPayServer {
 
     public static Map<?, ?> refundOrder(WechatRefundDTO dto) throws Exception {
         SortedMap<Object, Object> packageParams = createCommonParmas(dto.getAppId(), dto.getMchId());
-        packageParams.put("out_trade_no", dto.getTradeNo());// 商户订单号
-        packageParams.put("out_refund_no", dto.getOutRefundNo());// 商户退款单号
-        packageParams.put("total_fee", dto.getTotalFee());// 订单金额
-        packageParams.put("refund_fee", dto.getRefundFee());// 退款金额
+        packageParams.put("out_trade_no", dto.getTradeNo());
+        // 商户订单号
+        packageParams.put("out_refund_no", dto.getOutRefundNo());
+        // 商户退款单号
+        packageParams.put("total_fee", dto.getTotalFee());
+        // 订单金额
+        packageParams.put("refund_fee", dto.getRefundFee());
+        // 退款金额
         if (StringUtil.isNotBlank(dto.getFeeType())) {
-            packageParams.put("refund_fee_type", dto.getFeeType());// 退款币种
+            packageParams.put("refund_fee_type", dto.getFeeType());
+            // 退款币种
         }
         if (StringUtil.isNotBlank(dto.getRefundDesc())) {
-            packageParams.put("refund_desc", dto.getRefundDesc());// 退款原因
+            packageParams.put("refund_desc", dto.getRefundDesc());
+            // 退款原因
         }
         if (StringUtil.isNotBlank(dto.getNotifyUrl())) {
-            packageParams.put("notify_url", dto.getNotifyUrl());// 退款结果通知url
+            packageParams.put("notify_url", dto.getNotifyUrl());
+            // 退款结果通知url
         }
 
-        String sign = PayCommonUtil.createSign("UTF-8", packageParams, dto.getApiKey()); //密匙
-        packageParams.put("sign", sign);// 签名
+        //密匙
+        String sign = PayCommonUtil.createSign("UTF-8", packageParams, dto.getApiKey());
+        // 签名
+        packageParams.put("sign", sign);
         String requestXML = PayCommonUtil.getRequestXml(packageParams);
         String resXml = HttpUtil.postData(WechatConfigUtil.REFUND_URL, requestXML, null, dto.getProxyIp()
                 , dto.getProxyPort());
@@ -70,7 +79,7 @@ public class WechatPayServer {
     }
 
     public static SortedMap<Object, Object> createCommonParmas(String appId, String mchId) {
-        SortedMap<Object, Object> packageParams = new TreeMap<Object, Object>();
+        SortedMap<Object, Object> packageParams = new TreeMap<>();
         WechatConfigUtil.commonParams(packageParams, appId, mchId);
 
         return packageParams;
@@ -117,8 +126,10 @@ public class WechatPayServer {
         if (JSAPI_MODE.equalsIgnoreCase(appMode)) {
             packageParams.put("openid", openid);
         }
-        String sign = PayCommonUtil.createSign("UTF-8", packageParams, apiKey); //密匙
-        packageParams.put("sign", sign);// 签名
+        String sign = PayCommonUtil.createSign("UTF-8", packageParams, apiKey);
+        //密匙
+        packageParams.put("sign", sign);
+        // 签名
         String requestXML = PayCommonUtil.getRequestXml(packageParams);
         String resXml = HttpUtil.postData(WechatConfigUtil.UNIFIED_ORDER_URL, requestXML, null, proxyIp, proxyPort);
         return XMLUtil.doXMLParse(resXml);

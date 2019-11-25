@@ -1,5 +1,7 @@
 package tech.mhuang.ext.interchan.core.task;
 
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
+
 import java.util.Date;
 
 /**
@@ -154,4 +156,10 @@ public interface ISingleDymanicTask {
      * @return Boolean
      */
     Boolean updateJob(String jobName, Runnable run, Long secord);
+
+    /**
+     * 添加线程池任务调度类
+     * @param singlePoolTask 线程池任务调度
+     */
+    void addThreadPoolTaskScheduler(ThreadPoolTaskScheduler singlePoolTask);
 }

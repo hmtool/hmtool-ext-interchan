@@ -40,6 +40,7 @@ public class Result<T> {
     private T data;
 
     @ApiModelProperty(value = "异常信息")
+    @JsonInclude(Include.NON_NULL)
     private Object exceptionMsg;
 
     public Result(int code, String message) {

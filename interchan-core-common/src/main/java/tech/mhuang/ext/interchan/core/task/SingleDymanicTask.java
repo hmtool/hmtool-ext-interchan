@@ -2,13 +2,10 @@ package tech.mhuang.ext.interchan.core.task;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.support.CronSequenceGenerator;
 import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.scheduling.support.PeriodicTrigger;
-import org.springframework.stereotype.Component;
 import tech.mhuang.core.date.DateTimeUtil;
 
 import java.util.Date;
@@ -22,11 +19,8 @@ import java.util.concurrent.ScheduledFuture;
  * @author mhuang
  * @since 1.0.0
  */
-@Component
 public class SingleDymanicTask implements ISingleDymanicTask {
 
-    @Qualifier(SingleJobTaskConst.TASK_POOL_BEAN_NAME)
-    @Autowired(required = false)
     private ThreadPoolTaskScheduler threadPoolTaskScheduler;
 
     private Map<String, SingleInterjob> interJobMap = new ConcurrentHashMap<>();
@@ -245,5 +239,10 @@ public class SingleDymanicTask implements ISingleDymanicTask {
         }
         logger.debug("执行修改定时任务:{}，下次执行的秒数是:{}完成", jobName, secord);
         return result;
+    }
+
+    @Override
+    public void addThreadPoolTaskScheduler(ThreadPoolTaskScheduler singlePoolTask) {
+        this.threadPoolTaskScheduler = singlePoolTask;
     }
 }

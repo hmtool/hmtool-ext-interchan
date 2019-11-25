@@ -9,6 +9,7 @@ import tech.mhuang.ext.interchan.autoconfiguration.redis.RedisExtAutoConfigurati
 import tech.mhuang.ext.interchan.autoconfiguration.rest.RestAutoConfiguration;
 import tech.mhuang.ext.interchan.autoconfiguration.swagger.GatewaySwaggerAutoConfiguration;
 import tech.mhuang.ext.interchan.autoconfiguration.swagger.SwaggerAutoConfiguration;
+import tech.mhuang.ext.interchan.autoconfiguration.task.TaskAutoConfiguration;
 import tech.mhuang.ext.springboot.context.SpringBootExtAutoConfiguration;
 
 /**
@@ -20,6 +21,7 @@ import tech.mhuang.ext.springboot.context.SpringBootExtAutoConfiguration;
 @Configuration
 @Import({AuthAutoConfiguration.class, RestAutoConfiguration.class,
         SwaggerAutoConfiguration.class, RedisExtAutoConfiguration.class,
+        TaskAutoConfiguration.class,
         GatewaySwaggerAutoConfiguration.class, ExceptionAutoConfiguration.class})
 @AutoConfigureAfter(value = {SpringBootExtAutoConfiguration.class})
 public class InterchanAutoConfiguration {

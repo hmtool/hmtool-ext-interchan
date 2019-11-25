@@ -1,5 +1,6 @@
 package tech.mhuang.ext.interchan.core.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import tech.mhuang.ext.interchan.core.mapper.BaseMapper;
 import tech.mhuang.ext.interchan.core.service.BaseService;
 import tech.mhuang.ext.interchan.protocol.InsertInto;
@@ -16,6 +17,7 @@ import java.util.List;
  */
 public abstract class BaseServiceImpl<T extends Serializable, Id> implements BaseService<T, Id> {
 
+    @Autowired
     private BaseMapper<T, Id> baseMapper;
 
     public void setBaseMapper(BaseMapper<T, Id> baseMapper) {
