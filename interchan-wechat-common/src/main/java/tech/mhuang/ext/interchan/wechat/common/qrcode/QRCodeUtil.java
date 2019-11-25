@@ -31,7 +31,7 @@ import java.util.Map;
  * @author mhuang
  * @since 1.0.0
  */
-public class QRCodeUtils {
+public class QRCodeUtil {
 
     private static final String CHARSET = "utf-8";
     private static final String FORMAT_NAME = "JPG";
@@ -67,7 +67,7 @@ public class QRCodeUtils {
             return image;
         }
         // 插入图片  
-        QRCodeUtils.insertImage(image, imgPath, needCompress);
+        QRCodeUtil.insertImage(image, imgPath, needCompress);
         return image;
     }
 
@@ -127,7 +127,7 @@ public class QRCodeUtils {
      */
     public static void encode(String content, String imgPath, String destUrl,
                               boolean needCompress) throws Exception {
-        BufferedImage image = QRCodeUtils.createImage(content, imgPath,
+        BufferedImage image = QRCodeUtil.createImage(content, imgPath,
                 needCompress);
         File file = new File(destUrl);
         if (!file.exists()) {
@@ -161,7 +161,7 @@ public class QRCodeUtils {
      */
     public static void encode(String content, String imgPath, String destPath)
             throws Exception {
-        QRCodeUtils.encode(content, imgPath, destPath, false);
+        QRCodeUtil.encode(content, imgPath, destPath, false);
     }
 
     /**
@@ -174,7 +174,7 @@ public class QRCodeUtils {
      */
     public static void encode(String content, String destPath,
                               boolean needCompress) throws Exception {
-        QRCodeUtils.encode(content, null, destPath, needCompress);
+        QRCodeUtil.encode(content, null, destPath, needCompress);
     }
 
     /**
@@ -185,7 +185,7 @@ public class QRCodeUtils {
      * @throws Exception 异常
      */
     public static void encode(String content, String destPath) throws Exception {
-        QRCodeUtils.encode(content, null, destPath, false);
+        QRCodeUtil.encode(content, null, destPath, false);
     }
 
     /**
@@ -199,7 +199,7 @@ public class QRCodeUtils {
      */
     public static void encode(String content, String imgPath,
                               OutputStream output, boolean needCompress) throws Exception {
-        BufferedImage image = QRCodeUtils.createImage(content, imgPath,
+        BufferedImage image = QRCodeUtil.createImage(content, imgPath,
                 needCompress);
         ImageIO.write(image, FORMAT_NAME, output);
     }
@@ -213,7 +213,7 @@ public class QRCodeUtils {
      */
     public static void encode(String content, OutputStream output)
             throws Exception {
-        QRCodeUtils.encode(content, null, output, false);
+        QRCodeUtil.encode(content, null, output, false);
     }
 
     /**
@@ -248,7 +248,7 @@ public class QRCodeUtils {
      * @throws Exception 异常
      */
     public static String decode(String path) throws Exception {
-        return QRCodeUtils.decode(new File(path));
+        return QRCodeUtil.decode(new File(path));
     }
 
     public static void writeToFile(BitMatrix matrix, String format, File file)

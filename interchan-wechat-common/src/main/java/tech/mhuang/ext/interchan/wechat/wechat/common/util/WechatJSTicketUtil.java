@@ -1,4 +1,4 @@
-package tech.mhuang.ext.interchan.wechat.wechat.common.utils;
+package tech.mhuang.ext.interchan.wechat.wechat.common.util;
 
 import tech.mhuang.core.util.CryptoUtil;
 

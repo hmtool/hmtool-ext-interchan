@@ -1,4 +1,4 @@
-package tech.mhuang.ext.interchan.wechat.wechat.common.utils;
+package tech.mhuang.ext.interchan.wechat.wechat.common.util;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
