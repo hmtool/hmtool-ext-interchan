@@ -51,6 +51,17 @@ public class AuthProperties {
     private List<String> filterIncludeUrl = Stream.of("/*").collect(Collectors.toList());
 
     /**
+     * 不拦截的URL
+     */
+    @Deprecated
+    private List<String> filterExcludeUrl = Stream.of("/*").collect(Collectors.toList());
+
+    /**
+     * filter default authType
+     */
+    private String filterDefAuthType;
+
+    /**
      * security include url
      */
     private List<String> securityIncludeUrl = Stream.of("/monitor/**").collect(Collectors.toList());

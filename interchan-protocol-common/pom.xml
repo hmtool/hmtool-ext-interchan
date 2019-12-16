@@ -6,7 +6,7 @@
     <parent>
         <groupId>tech.mhuang</groupId>
         <artifactId>hmtool-ext-interchan</artifactId>
-        <version>1.4.0</version>
+        <version>1.4.1</version>
     </parent>
     <artifactId>interchan-protocol-common</artifactId>
     <name>interchan-protocol-common</name>
@@ -17,8 +17,13 @@
             <artifactId>lombok</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>1.5.22</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
         </dependency>
     </dependencies>
 </project>

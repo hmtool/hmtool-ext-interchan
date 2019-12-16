@@ -20,17 +20,10 @@ import tech.mhuang.ext.spring.util.DataUtil;
 import tech.mhuang.ext.spring.util.IpUtil;
 import tech.mhuang.ext.spring.webmvc.WebRequestHeader;
 
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -45,7 +38,7 @@ public class AuthFilter implements Filter {
 
     @Setter
     @Getter
-    private List<String> excludeUrl = new ArrayList<>();
+    private String defaultAuthTypeValue;
 
     /**
      * 权限类型--对应jwt的name名
@@ -71,12 +64,13 @@ public class AuthFilter implements Filter {
                 JwtFramework jwtFramework = SpringContextHolder.getBean(JwtFramework.class);
                 String authType = request.getHeader(AUTH_TYPE);
                 String auth = null, headerName = null;
-                if (StringUtil.isNotEmpty(authType)) {
-                    Jwt.JwtBean jwtBean = jwtFramework.getJwt().getBeanMap().get(authType);
-                    if (ObjectUtil.isNotEmpty(jwtBean)) {
-                        auth = request.getHeader(jwtBean.getType());
-                        headerName = jwtBean.getHeaderName();
-                    }
+                if (StringUtil.isEmpty(authType)) {
+                    authType = defaultAuthTypeValue;
+                }
+                Jwt.JwtBean jwtBean = jwtFramework.getJwt().getBeanMap().get(authType);
+                if (ObjectUtil.isNotEmpty(jwtBean)) {
+                    auth = request.getHeader(jwtBean.getType());
+                    headerName = jwtBean.getHeaderName();
                 }
                 if (StringUtil.isBlank(auth)) {
                     GlobalHeaderThreadLocal.set(globalHeader);

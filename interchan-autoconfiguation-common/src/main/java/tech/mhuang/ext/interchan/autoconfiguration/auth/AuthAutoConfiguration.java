@@ -42,8 +42,10 @@ public class AuthAutoConfiguration {
 
     @Bean
     public FilterRegistrationBean filterRegistrationBean() {
+        AuthFilter authFilter = new AuthFilter();
+        authFilter.setDefaultAuthTypeValue(properties.getFilterDefAuthType());
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-        registrationBean.setFilter(new AuthFilter());
+        registrationBean.setFilter(authFilter);
         registrationBean.setUrlPatterns(this.properties.getFilterIncludeUrl());
         return registrationBean;
     }

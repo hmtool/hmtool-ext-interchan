@@ -6,7 +6,7 @@
     <parent>
         <groupId>tech.mhuang</groupId>
         <artifactId>hmtool-ext-interchan</artifactId>
-        <version>1.4.0</version>
+        <version>1.4.1</version>
     </parent>
     <artifactId>interchan-redis-common</artifactId>
     <name>interchan-redis-common</name>
