@@ -9,7 +9,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>interchan-starter-common</artifactId>
-
     <dependencies>
         <dependency>
             <groupId>tech.mhuang</groupId>

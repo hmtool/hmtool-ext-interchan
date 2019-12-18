@@ -94,7 +94,11 @@ public abstract class AbstractBaseRedisCommands implements IRedisExtCommands {
 
     @Override
     public long append(int index, String key, Object value) {
-        return 0L;
+        return baseTempalte.execute((RedisConnection connection)->{
+            connection.select(index);
+            RedisSerializer<String> serializer = baseTempalte.getStringSerializer();
+            return connection.append(serializer.serialize(key),serializer.serialize(value instanceof String ? (String)value : JSON.toJSONString(value)));
+        });
     }
 
     /**
@@ -110,7 +114,7 @@ public abstract class AbstractBaseRedisCommands implements IRedisExtCommands {
         return baseTempalte.execute((RedisConnection connection) -> {
             connection.select(index);
             RedisSerializer<String> serializer = baseTempalte.getStringSerializer();
-            String val = JSON.toJSONString(value);
+            String val = value instanceof String ? (String) value : JSON.toJSONString(value);
             return connection.zAdd(serializer.serialize(key), score, serializer.serialize(val));
         });
     }
@@ -156,7 +160,7 @@ public abstract class AbstractBaseRedisCommands implements IRedisExtCommands {
             RedisSerializer<String> serializer = baseTempalte.getStringSerializer();
             Map<byte[], byte[]> hmsetMap = new HashMap<>(params.size());
             params.forEach((field, value) -> {
-                String val = JSON.toJSONString(value);
+                String val = value instanceof String ? (String)value:JSON.toJSONString(value);
                 hmsetMap.put(
                         serializer.serialize(field),
                         serializer.serialize(val)
@@ -245,7 +249,7 @@ public abstract class AbstractBaseRedisCommands implements IRedisExtCommands {
         return baseTempalte.execute((RedisConnection connection) -> {
             connection.select(index);
             RedisSerializer<String> serializer = baseTempalte.getStringSerializer();
-            connection.set(serializer.serialize(key), serializer.serialize(JSON.toJSONString(value)));
+            connection.set(serializer.serialize(key), serializer.serialize(value instanceof String ? (String)value : JSON.toJSONString(value)));
             return true;
         });
     }
@@ -269,7 +273,6 @@ public abstract class AbstractBaseRedisCommands implements IRedisExtCommands {
             } else {
                 connection.setEx(serializer.serialize(key), expireTime, serializer.serialize(JSON.toJSONString(value)));
             }
-
             return true;
         });
     }
@@ -295,7 +298,7 @@ public abstract class AbstractBaseRedisCommands implements IRedisExtCommands {
             Map<byte[], byte[]> result = new HashMap<>(map.size());
             map.forEach((key, value) -> result.put(
                     serializer.serialize(key),
-                    serializer.serialize(JSON.toJSONString(value))
+                    serializer.serialize(value instanceof  String ? (String)value : JSON.toJSONString(value))
             ));
 
             connection.mSet(result);
@@ -323,8 +326,9 @@ public abstract class AbstractBaseRedisCommands implements IRedisExtCommands {
 
     @Override
     public long append(String key, Object value) {
-        return 0;
+        return append(defaultDbIndex,key,value);
     }
+
 
     @Override
     public long del(int index, String key) {
@@ -423,7 +427,7 @@ public abstract class AbstractBaseRedisCommands implements IRedisExtCommands {
         return baseTempalte.execute((RedisConnection connection) -> {
             connection.select(index);
             RedisSerializer<String> serializer = baseTempalte.getStringSerializer();
-            String val = JSON.toJSONString(member);
+            String val = member instanceof String ? (String)member : JSON.toJSONString(member);
             return connection.zIncrBy(serializer.serialize(key), score, serializer.serialize(val));
         });
     }
