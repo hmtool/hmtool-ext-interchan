@@ -87,8 +87,8 @@ public abstract class AbstractRestTemplate extends RestTemplate {
      * 将file转换成byteArrayResource
      *
      * @param file File
-     * @return ByteArrayResource
-     * @throws IOException
+     * @return ByteArrayResource资源
+     * @throws IOException 完整异常
      */
     public static ByteArrayResource convertFileToByteArrayResource(File file) throws IOException {
 

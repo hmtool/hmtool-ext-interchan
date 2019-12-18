@@ -25,7 +25,8 @@ public class CommonExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public Result<?> defaultErrorHandler(HttpServletRequest request, Exception e) {
 
-        logger.error("---Exception Handler---Host {} invokes url {} ERROR: {}", request.getRemoteHost(), request.getRequestURL(), e.getMessage());
+        logger.error("---Exception Handler---Host {} invokes url {} ERROR: {}",
+                request.getRemoteHost(), request.getRequestURL(), e.getMessage(),e);
 
         Result result = new Result<>();
 
