@@ -17,7 +17,7 @@
         <hmtool.core.version>1.3.0</hmtool.core.version>
         <hmtool.ext.jwt.version>1.3.1</hmtool.ext.jwt.version>
         <hmtool.ext.spring.version>1.3.1</hmtool.ext.spring.version>
-        <hmtool.ext.springboot.version>1.3.1</hmtool.ext.springboot.version>
+        <hmtool.ext.springboot.version>1.3.2</hmtool.ext.springboot.version>
         <hmtool.ext.kafka.version>1.3.1</hmtool.ext.kafka.version>
         <hmtool.ext.kafka.springboot.version>1.3.1</hmtool.ext.kafka.springboot.version>
         <hmtool.ext.jwt.springboot.version>1.3.1</hmtool.ext.jwt.springboot.version>
