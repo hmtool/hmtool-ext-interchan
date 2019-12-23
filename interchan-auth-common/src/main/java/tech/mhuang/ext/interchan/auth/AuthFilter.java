@@ -66,6 +66,10 @@ public class AuthFilter implements Filter {
                 String auth = null, headerName = null;
                 if (StringUtil.isEmpty(authType)) {
                     authType = defaultAuthTypeValue;
+                    if(StringUtil.isEmpty(authType)){
+                        chain.doFilter(httpRequest, httpResponse);
+                        return;
+                    }
                 }
                 Jwt.JwtBean jwtBean = jwtFramework.getJwt().getBeanMap().get(authType);
                 if (ObjectUtil.isNotEmpty(jwtBean)) {

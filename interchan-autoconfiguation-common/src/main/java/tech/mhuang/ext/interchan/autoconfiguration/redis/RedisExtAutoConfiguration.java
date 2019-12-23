@@ -1,9 +1,9 @@
 package tech.mhuang.ext.interchan.autoconfiguration.redis;
 
+import io.lettuce.core.RedisClient;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,6 +27,7 @@ import tech.mhuang.ext.interchan.redis.lock.DistributedLockHandler;
 public class RedisExtAutoConfiguration {
 
     @Bean
+    @ConditionalOnClass(RedisClient.class)
     @ConditionalOnBean(RedisTemplate.class)
     public RedisTemplate<String, Object> redisTemplate(LettuceConnectionFactory lettuceConnectionFactory) {
         lettuceConnectionFactory.setShareNativeConnection(false);

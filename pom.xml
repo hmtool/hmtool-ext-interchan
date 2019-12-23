@@ -5,7 +5,7 @@
 
     <groupId>tech.mhuang</groupId>
     <artifactId>hmtool-ext-interchan</artifactId>
-    <version>1.4.1</version>
+   <version>1.4.2</version>
     <packaging>pom</packaging>
     <name>hmtool-ext-interchan</name>
     <properties>
@@ -13,6 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <bootstrap.swagger.version>2.0.0</bootstrap.swagger.version>
         <jdom.version>2.0.6</jdom.version>
+        <dom4j.version>2.1.1</dom4j.version>
         <mybatis.spring.boot.starter.version>2.0.0</mybatis.spring.boot.starter.version>
         <hmtool.core.version>1.3.0</hmtool.core.version>
         <hmtool.ext.jwt.version>1.3.1</hmtool.ext.jwt.version>
@@ -21,7 +22,7 @@
         <hmtool.ext.kafka.version>1.3.1</hmtool.ext.kafka.version>
         <hmtool.ext.kafka.springboot.version>1.3.1</hmtool.ext.kafka.springboot.version>
         <hmtool.ext.jwt.springboot.version>1.3.1</hmtool.ext.jwt.springboot.version>
-        <hmtool.ext.elasticsearch.version>1.3.1</hmtool.ext.elasticsearch.version>
+        <hmtool.ext.elasticsearch.version>1.3.2</hmtool.ext.elasticsearch.version>
         <alipay.sdk.java.version>3.4.49.ALL</alipay.sdk.java.version>
         <zxing.core.version>3.3.3</zxing.core.version>
         <fastjson.version>1.2.62</fastjson.version>
@@ -142,7 +143,7 @@
             <dependency>
                 <groupId>org.dom4j</groupId>
                 <artifactId>dom4j</artifactId>
-                <version>2.1.1</version>
+                <version>${dom4j.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
