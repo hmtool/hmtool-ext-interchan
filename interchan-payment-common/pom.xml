@@ -6,7 +6,7 @@
     <parent>
         <groupId>tech.mhuang</groupId>
         <artifactId>hmtool-ext-interchan</artifactId>
-       <version>1.4.2</version>
+       <version>1.4.3</version>
     </parent>
     <artifactId>interchan-payment-common</artifactId>
     <name>interchan-payment-common</name>
