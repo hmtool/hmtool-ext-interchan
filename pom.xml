@@ -13,7 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <bootstrap.swagger.version>2.0.0</bootstrap.swagger.version>
         <jdom.version>2.0.6</jdom.version>
-        <dom4j.version>2.1.1</dom4j.version>
+        <dom4j.version>2.1.3</dom4j.version>
         <mybatis.spring.boot.starter.version>2.0.0</mybatis.spring.boot.starter.version>
         <hmtool.core.version>1.3.0</hmtool.core.version>
         <hmtool.ext.jwt.version>1.3.1</hmtool.ext.jwt.version>
