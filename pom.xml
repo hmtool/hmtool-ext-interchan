@@ -27,7 +27,7 @@
         <zxing.core.version>3.3.3</zxing.core.version>
         <fastjson.version>1.2.62</fastjson.version>
         <xstream.version>1.4.11.1</xstream.version>
-        <resthigh.client.version>7.5.0</resthigh.client.version>
+        <resthigh.client.version>7.13.3</resthigh.client.version>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
